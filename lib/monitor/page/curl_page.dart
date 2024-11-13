@@ -154,37 +154,37 @@ class _CurlPageState extends State<CurlPage> {
 
   _buildText(String text) {
     //处理Curl相关的数据
-    if (widget.tag == 'Curl' && !InnerUtils.isEmpty(_controller.text)) {
-      text = text.replaceAll(_controller.text, '[${_controller.text}]');
-      return _formatColorRichText(text, [
-        TextStyle(color: Colors.white),
-        TextStyle(color: Colors.red),
-      ]);
-    }
+    // if (widget.tag == 'Curl' && !InnerUtils.isEmpty(_controller.text)) {
+    //   text = text.replaceAll(_controller.text, '[${_controller.text}]');
+    //   return _formatColorRichText(text, [
+    //     TextStyle(color: Colors.white),
+    //     TextStyle(color: Colors.red),
+    //   ]);
+    // }
 
     //处理请求结果返回的数据
-    if (widget.tag == 'Response') {
-      int index = text.indexOf('\n');
-      String highLightText = text.substring(0, index);
-      text = text.substring(index + 1, text.length);
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InnerUtils.isEmpty(_controller.text)
-              ? Text(highLightText, style: TextStyle(color: Colors.cyanAccent))
-              : _formatColorRichText(
-                  highLightText.replaceAll(_controller.text, '[${_controller.text}]'),
-                  [
-                    TextStyle(color: Colors.cyanAccent),
-                    TextStyle(color: Colors.red),
-                  ],
-                ),
-          JsonShrinkWidget(json: text, deepShrink: 1),
-        ],
-      );
-    }
+    // if (widget.tag == 'Response') {
+    int index = text.indexOf('\n');
+    String highLightText = text.substring(0, index);
+    text = text.substring(index + 1, text.length);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InnerUtils.isEmpty(_controller.text)
+            ? Text(highLightText, style: TextStyle(color: Colors.cyanAccent))
+            : _formatColorRichText(
+                highLightText.replaceAll(_controller.text, '[${_controller.text}]'),
+                [
+                  TextStyle(color: Colors.cyanAccent),
+                  TextStyle(color: Colors.red),
+                ],
+              ),
+        JsonShrinkWidget(json: text, deepShrink: 1),
+      ],
+    );
+    // }
     //普通文本数据
-    return Text(text, style: TextStyle(color: Colors.white));
+    // return Text(text, style: TextStyle(color: Colors.white));
   }
 
   ///通过判断缓存是否有widget,减少正则匹配的次数
